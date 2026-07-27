@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del producto - Chester</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: linear-gradient(180deg, #fff8f2 0%, #fff 100%);
+      }
+      .product-page {
+        max-width: 1120px;
+        margin: 2rem auto;
+        padding: 1.2rem;
+      }
+      .product-shell {
+        background: white;
+        border-radius: 28px;
+        padding: 1.4rem;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.4rem;
+      }
+      .gallery {
+        display: grid;
+        gap: 0.7rem;
+      }
+      .gallery-main img {
+        width: 100%;
+        height: 360px;
+        object-fit: cover;
+        border-radius: 20px;
+        background: #f8f8f8;
+      }
+      .gallery-thumbs {
+        display: flex;
+        gap: 0.6rem;
+      }
+      .gallery-thumbs img {
+        width: 74px;
+        height: 74px;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 2px solid transparent;
+        cursor: pointer;
+      }
+      .gallery-thumbs img.active {
+        border-color: #ff5a36;
+      }
+      .product-info h1 {
+        margin: 0.2rem 0 0.6rem;
+        font-size: 1.9rem;
+      }
+      .product-info p {
+        line-height: 1.6;
+      }
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .price-row strong {
+        font-size: 1.5rem;
+        color: #222;
+      }
+      .buy-btn {
+        padding: 0.8rem 1rem;
+        border-radius: 999px;
+        border: none;
+        background: #ff5a36;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .buy-btn.secondary {
+        background: #222;
+      }
+      .buy-btn.active {
+        background: #1f9d5a;
+      }
+      .purchase-message {
+        margin-top: 0.7rem;
+        color: #ff5a36;
+        font-weight: bold;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: #ff5a36;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .detail-section {
+        background: #fff8f2;
+        border-radius: 16px;
+        padding: 0.9rem 1rem;
+        margin-top: 1rem;
+      }
+      @media (max-width: 800px) {
+        .product-shell {
+          grid-template-columns: 1fr;
+        }
+        .gallery-main img {
+          height: 280px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="product-page">
+      <a class="back-link" href="index.html">← Volver a la tienda</a>
+      <div class="product-shell">
+        <div class="gallery">
+          <div class="gallery-main">
+            <img id="productImage" src="images/jacket.svg" alt="Producto" />
+          </div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+        <div class="product-info">
+          <span class="preview-pill" id="productBadge">Nuevo</span>
+          <h1 id="productTitle">Producto</h1>
+          <p id="productDescription">Descripción del producto.</p>
+          <div class="detail-meta">
+            <span id="productRating">⭐ 4.8/5</span>
+            <span>⚡ Envío en 24h</span>
+            <span id="productStock">📦 Stock: 12</span>
+          </div>
+              <div class="price-row">
+            <strong id="productPrice">$18</strong>
+            <div>
+              <button class="buy-btn" id="productAdd">Añadir al carrito</button>
+              <button class="buy-btn secondary" id="productBuy">Comprar</button>
+            </div>
+          </div>
+          <p id="purchaseMessage" class="purchase-message">Elige una opción para continuar.</p>
+          <button class="buy-btn secondary" id="productRemove" style="display:none; margin-top:0.5rem;">Quitar producto</button>
+          <div class="detail-section">
+            <h4>¿Por qué te va a gustar?</h4>
+            <ul id="productFeatures"></ul>
+          </div>
+          <div class="detail-section">
+            <h4>Comentarios de clientes</h4>
+            <div id="productComments"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const products = {
+        'chaqueta-ligera': {
+          title: 'Chaqueta ligera',
+          description: 'Una chaqueta ligera ideal para el día a día, con un ajuste cómodo y una apariencia moderna.',
+          images: ['images/jacket.svg', 'images/jacket.svg'],
+          badge: 'Nuevo',
+          price: '$18',
+          rating: '⭐ 4.8/5',
+          stock: '📦 Stock: 12',
+          features: ['Material transpirable', 'Cierre suave y práctico', 'Ideal para primavera y otoño'],
+          comments: ['Marta: Muy cómoda y se ve elegante.', 'Leo: Llegó rápido y el material se siente de calidad.']
+        },
+        'mini-jardin': {
+          title: 'Mini jardín',
+          description: 'Un mini jardín decorativo que aporta frescura y estilo a tu habitación o escritorio.',
+          images: ['images/plant.svg', 'images/plant.svg'],
+          badge: 'Oferta',
+          price: '$14',
+          rating: '⭐ 4.6/5',
+          stock: '📦 Stock: 8',
+          features: ['Fácil de ubicar', 'Diseño limpio y natural', 'Perfecto para ambientar espacios pequeños'],
+          comments: ['Sofía: Se ve muy bonito y le dio vida al escritorio.', 'Tomás: Muy buen regalo, llegó en perfecto estado.']
+        },
+        'cargador-portatil': {
+          title: 'Cargador portátil',
+          description: 'Un cargador compacto, rápido y confiable para tus dispositivos cuando estás fuera de casa o de viaje.',
+          images: ['images/charger.svg', 'images/charger.svg'],
+          badge: 'Top',
+          price: '$22',
+          rating: '⭐ 4.9/5',
+          stock: '📦 Stock: 15',
+          features: ['Carga rápida', 'Ligero y fácil de transportar', 'Compatible con varios dispositivos'],
+          comments: ['Nico: Me ha salvado varias veces en viajes cortos.', 'Dani: Muy práctico y el acabado se siente premium.']
+        },
+        'mochila-urbana': {
+          title: 'Mochila urbana',
+          description: 'Una mochila urbana espaciosa y funcional, pensada para ir a clases, al trabajo o para tus escapadas diarias.',
+          images: ['images/backpack.svg', 'images/backpack.svg'],
+          badge: 'Envío gratis',
+          price: '$26',
+          rating: '⭐ 4.7/5',
+          stock: '📦 Stock: 10',
+          features: ['Compartimentos cómodos', 'Diseño moderno', 'Muy práctica para cargar essentials'],
+          comments: ['Ana: Tiene mucho espacio y se ve muy bien.', 'Pablo: Ideal para llevar todo en el día a día.']
+        }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const key = params.get('product') || 'chaqueta-ligera';
+      const product = products[key];
+      const purchaseMessage = document.getElementById('purchaseMessage');
+      const addButton = document.getElementById('productAdd');
+      const buyButton = document.getElementById('productBuy');
+      const removeButton = document.getElementById('productRemove');
+      const cartStorageKey = 'chesterCart';
+
+      function loadCart() {
+        try {
+          return JSON.parse(localStorage.getItem(cartStorageKey)) || {};
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function saveCart(cartItems) {
+        localStorage.setItem(cartStorageKey, JSON.stringify(cartItems));
+      }
+
+      let cartItems = loadCart();
+
+      function renderProduct() {
+        if (!product) return;
+        document.title = `${product.title} - Chester`;
+        const image = document.getElementById('productImage');
+        const thumbs = document.getElementById('galleryThumbs');
+        image.src = product.images[0];
+        image.alt = product.title;
+        thumbs.innerHTML = product.images.map((src, index) => `<img src="${src}" alt="${product.title} ${index + 1}" class="${index === 0 ? 'active' : ''}" />`).join('');
+        thumbs.querySelectorAll('img').forEach((thumb) => {
+          thumb.addEventListener('click', () => {
+            thumbs.querySelectorAll('img').forEach((item) => item.classList.remove('active'));
+            thumb.classList.add('active');
+            image.src = thumb.getAttribute('src');
+          });
+        });
+        document.getElementById('productBadge').textContent = product.badge;
+        document.getElementById('productTitle').textContent = product.title;
+        document.getElementById('productDescription').textContent = product.description;
+        document.getElementById('productRating').textContent = product.rating;
+        document.getElementById('productStock').textContent = product.stock;
+        document.getElementById('productPrice').textContent = product.price;
+        document.getElementById('productFeatures').innerHTML = product.features.map((item) => `<li>${item}</li>`).join('');
+        document.getElementById('productComments').innerHTML = product.comments.map((item) => `<p>${item}</p>`).join('');
+      }
+
+      function syncButtons() {
+        const isAdded = Boolean(cartItems[product.title] && cartItems[product.title].quantity > 0);
+        addButton.classList.toggle('active', isAdded);
+        buyButton.classList.toggle('active', isAdded);
+        addButton.textContent = isAdded ? 'Añadido' : 'Añadir al carrito';
+        buyButton.textContent = isAdded ? '¡Listo!' : 'Comprar';
+        removeButton.style.display = isAdded ? 'inline-block' : 'none';
+      }
+
+      addButton.addEventListener('click', () => {
+        cartItems[product.title] = { quantity: 1 };
+        saveCart(cartItems);
+        syncButtons();
+        purchaseMessage.textContent = 'Producto agregado al carrito.';
+      });
+
+      buyButton.addEventListener('click', () => {
+        cartItems[product.title] = { quantity: 1 };
+        saveCart(cartItems);
+        syncButtons();
+        purchaseMessage.textContent = 'Compra confirmada de forma demo.';
+      });
+
+      removeButton.addEventListener('click', () => {
+        delete cartItems[product.title];
+        saveCart(cartItems);
+        syncButtons();
+        purchaseMessage.textContent = 'Producto quitado.';
+      });
+
+      syncButtons();
+      renderProduct();
+    </script>
+  </body>
+</html>

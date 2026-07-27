@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chester - Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">Chester</div>
+      <label class="search-box">
+        <span>🔍</span>
+        <input id="searchInput" type="text" placeholder="Buscar productos..." />
+      </label>
+      <button class="cart-btn" id="cartToggle">Carrito <span id="cartCount">0</span></button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="pill">🔥 Envío rápido • Ofertas del día</p>
+          <h1>Compra fácil, rápida y con precios que sorprenden</h1>
+          <p class="hero-text">Una demo realista de tienda online con descuentos, categorías y carrito interactivo.</p>
+          <div class="hero-actions">
+            <a href="#productos" class="primary-btn">Ver productos</a>
+            <a href="#ofertas" class="ghost-btn">Ver ofertas</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>✨ Oferta destacada</h3>
+          <p>Combo hogar + accesorios por solo $30</p>
+          <div class="hero-metrics">
+            <span>24h de entrega</span>
+            <span>4.8/5</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="ofertas" class="section">
+        <div class="section-head">
+          <h2>Ofertas</h2>
+          <span class="muted">Descuentos activos hoy</span>
+        </div>
+        <div class="offers">
+          <article class="offer-card active">
+            <h3>Envío gratis</h3>
+            <p>En compras desde $25.</p>
+            <button class="offer-btn">Seleccionar</button>
+          </article>
+          <article class="offer-card">
+            <h3>2x1 en hogar</h3>
+            <p>Elige dos productos por el precio de uno.</p>
+            <button class="offer-btn">Seleccionar</button>
+          </article>
+          <article class="offer-card">
+            <h3>Descuento flash</h3>
+            <p>Hasta 30% de ahorro hoy.</p>
+            <button class="offer-btn">Seleccionar</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="categorias" class="section">
+        <div class="section-head">
+          <h2>Categorías</h2>
+          <span class="muted">Explora por tipo de producto</span>
+        </div>
+        <div class="chips">
+          <button class="category-chip active" data-category="all">Todo</button>
+          <button class="category-chip" data-category="ropa">Ropa</button>
+          <button class="category-chip" data-category="hogar">Hogar</button>
+          <button class="category-chip" data-category="electronica">Electrónica</button>
+          <button class="category-chip" data-category="accesorios">Accesorios</button>
+        </div>
+      </section>
+
+      <section id="productos" class="section">
+        <div class="section-head">
+          <h2>Productos destacados</h2>
+          <p id="filterLabel">Mostrando todos</p>
+        </div>
+        <div class="products-layout">
+          <div class="products">
+            <article class="product-card selected" data-category="ropa" data-name="Chaqueta ligera" data-desc="Ideal para el día a día, con un ajuste cómodo y muy práctico para salir." data-price="18" data-product="chaqueta-ligera">
+              <span class="badge">Nuevo</span>
+              <img class="product-image" src="images/jacket.svg" alt="Chaqueta ligera de estilo urbano" />
+              <h3>Chaqueta ligera</h3>
+              <p class="short-text">Ligera, cómoda y con estilo casual.</p>
+              <div class="product-footer">
+                <strong>$18</strong>
+                <button class="buy-btn">Añadir</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="hogar" data-name="Mini jardín" data-desc="Decoración sencilla y fresca para tu habitación o escritorio." data-price="14" data-product="mini-jardin">
+              <span class="badge sale">Oferta</span>
+              <img class="product-image" src="images/plant.svg" alt="Mini jardín decorativo" />
+              <h3>Mini jardín</h3>
+              <p class="short-text">Un toque natural para cualquier espacio.</p>
+              <div class="product-footer">
+                <strong>$14</strong>
+                <button class="buy-btn">Añadir</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="electronica" data-name="Cargador portátil" data-desc="Pequeño, rápido y perfecto para llevar en tu mochila." data-price="22" data-product="cargador-portatil">
+              <span class="badge">Top</span>
+              <img class="product-image" src="images/charger.svg" alt="Cargador portátil compacto" />
+              <h3>Cargador portátil</h3>
+              <p class="short-text">Carga tus dispositivos en cualquier momento.</p>
+              <div class="product-footer">
+                <strong>$22</strong>
+                <button class="buy-btn">Añadir</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-category="accesorios" data-name="Mochila urbana" data-desc="Ideal para ir a clases, trabajo o viajes cortos." data-price="26" data-product="mochila-urbana">
+              <span class="badge">Envío gratis</span>
+              <img class="product-image" src="images/backpack.svg" alt="Mochila urbana moderna" />
+              <h3>Mochila urbana</h3>
+              <p class="short-text">Espaciosa, práctica y con buen diseño.</p>
+              <div class="product-footer">
+                <strong>$26</strong>
+                <button class="buy-btn">Añadir</button>
+              </div>
+            </article>
+          </div>
+
+          <div id="productDetail" class="detail-overlay" aria-hidden="true">
+          <div class="detail-modal">
+            <button class="close-detail" id="closeDetail" aria-label="Cerrar vista detallada">✕</button>
+            <div id="detailContent" class="detail-content"></div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Recomendados para ti</h2>
+          <span class="muted">Productos que suelen combinarse</span>
+        </div>
+        <div class="mini-grid">
+          <article class="mini-card">
+            <h3>Lampara LED</h3>
+            <p>Ideal para estudio y dormitorio.</p>
+          </article>
+          <article class="mini-card">
+            <h3>Set de cocina</h3>
+            <p>Práctico y con diseño moderno.</p>
+          </article>
+          <article class="mini-card">
+            <h3>Reloj digital</h3>
+            <p>Pequeño, útil y muy cómodo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section testimonials">
+        <h2>Lo que dicen los clientes</h2>
+        <div class="testimonial-box">
+          <p>“Muy buena experiencia, todo llegó rápido y el precio fue excelente.”</p>
+          <strong>— Ana, cliente de Chester</strong>
+        </div>
+      </section>
+
+      <section id="carrito" class="cart-panel">
+        <h3>Tu carrito</h3>
+        <ul id="cartList">
+          <li>Tu carrito está vacío</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Chester © 2026 · Demo de tienda online</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
